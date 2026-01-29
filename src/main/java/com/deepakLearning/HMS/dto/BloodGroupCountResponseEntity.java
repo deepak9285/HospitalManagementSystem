@@ -12,4 +12,8 @@ public class BloodGroupCountResponseEntity {
     private BloodGroupType bloodGroupType;
     private Long count;
 
+    public BloodGroupCountResponseEntity(BloodGroupType bloodGroupType, Long count) {
+        this.bloodGroupType = bloodGroupType;
+        this.count = count;
+    }
 }

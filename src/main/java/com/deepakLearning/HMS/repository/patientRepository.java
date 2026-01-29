@@ -11,7 +11,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import java.awt.print.Pageable;
+import org.springframework.data.domain.Pageable;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -25,10 +25,10 @@ public interface patientRepository extends JpaRepository<patient,Long> {
     @Query("Select p from patient p where p.bloodGroup=?1")
     List<patient>findByBloodGroup(@Param("bloodGroup") BloodGroupType bloodGroup);
 
-    @Query("Select p from patient p where p.birthData >:birthDate")
+    @Query("Select p from patient p where p.birthDate >:birthDate")
     List<patient> findByBornAfterDate(@Param("birthDate") LocalDate birthDate);
 
-    @Query("Select new com.deepakLearning.HMS.dto.BloodGroupCountResponseEntity(p.bloodGroup, Count(p)) from patient p from p group by p.bloodGroupType")
+    @Query("Select new com.deepakLearning.HMS.dto.BloodGroupCountResponseEntity(p.bloodGroup, Count(p)) from patient p group by p.bloodGroup")
     List<BloodGroupCountResponseEntity> countEachBloodGroupType();
 
     @Query(value = "Select * from patient",nativeQuery = true)
